@@ -32,12 +32,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="20210908-bl-project-init" />
-                    <option name="lastUsedInstant" value="1631125569" />
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1631125603" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1631125280" />
+                    <option name="branchName" value="20210908-bl-project-init" />
+                    <option name="lastUsedInstant" value="1631125569" />
                   </RecentBranch>
                 </list>
               </option>
@@ -55,6 +55,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -102,7 +103,7 @@
       <workItem from="1631118610363" duration="51000" />
       <workItem from="1631118669737" duration="1229000" />
       <workItem from="1631120179831" duration="2082000" />
-      <workItem from="1631123802582" duration="1463000" />
+      <workItem from="1631123802582" duration="3563000" />
     </task>
     <servers />
   </component>
