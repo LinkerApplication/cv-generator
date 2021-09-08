@@ -272,3 +272,5 @@ fabric.properties
 .idea/codestream.xml
 
 .idea/
+
+.index/
