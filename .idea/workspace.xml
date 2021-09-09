@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15c61fe6-2599-4124-a2bb-9ca83ce82d17" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/auto_docs_urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/poetry.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pyproject.toml" beforeDir="false" />
-    </list>
+    <list default="true" id="15c61fe6-2599-4124-a2bb-9ca83ce82d17" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +108,7 @@
       <workItem from="1631197762982" duration="417000" />
       <workItem from="1631198220123" duration="113000" />
       <workItem from="1631198337312" duration="26000" />
-      <workItem from="1631198419967" duration="1006000" />
+      <workItem from="1631198419967" duration="1323000" />
     </task>
     <servers />
   </component>
