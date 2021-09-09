@@ -22,6 +22,3 @@ urlpatterns += [
 
 # swagger urls
 urlpatterns += swagger
-
-
-
