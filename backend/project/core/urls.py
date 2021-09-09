@@ -12,13 +12,3 @@ urlpatterns = [
 urlpatterns += [
     path('api-auth/', include('rest_framework.urls')),
 ]
-
-
-# our urls
-urlpatterns += [
-
-]
-
-
-# swagger urls
-urlpatterns += swagger
