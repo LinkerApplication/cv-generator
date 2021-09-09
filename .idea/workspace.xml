@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15c61fe6-2599-4124-a2bb-9ca83ce82d17" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/backend/project/core/auto_docs_urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/project/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/project/core/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="15c61fe6-2599-4124-a2bb-9ca83ce82d17" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +108,7 @@
       <workItem from="1631197762982" duration="417000" />
       <workItem from="1631198220123" duration="113000" />
       <workItem from="1631198337312" duration="26000" />
-      <workItem from="1631198419967" duration="2104000" />
+      <workItem from="1631198419967" duration="2243000" />
     </task>
     <servers />
   </component>
