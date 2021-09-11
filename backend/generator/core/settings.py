@@ -23,7 +23,6 @@ INSTALLED_APPS = [
 
     # other apps
     'rest_framework',
-    'drf_yasg',
 
     # our apps
 
