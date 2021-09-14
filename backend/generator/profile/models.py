@@ -9,15 +9,6 @@ class Profile(models.Model):
     number = models.CharField(max_length=15)
     about_me = models.TextField(blank=True)
     website = models.URLField(blank=True)
-    places_of_work = models.ManyToManyField('PlaceOfWork')
 
     def __str__(self):
         return self.full_name
-
-
-class PlaceOfWork(models.Model):
-    work = models.CharField(max_length=255)
-    experience = models.PositiveSmallIntegerField(default=0)
-
-    def __str__(self):
-        return f'Experience: {self.experience} - Работа: {self.work}'
