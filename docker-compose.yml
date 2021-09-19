@@ -1,13 +1,15 @@
 version: "3.9"
 
 services:
-  web:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
     command: python /backend/generator/manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
+    environment:
+      POSTGRES_HOST: db
     volumes:
       - ./backend/:/backend
     ports:
