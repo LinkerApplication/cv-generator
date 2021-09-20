@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.postgres.fields import DateRangeField
 from django.db import models
 
 
@@ -16,8 +17,7 @@ class Profile(models.Model):
 
 class Experience(models.Model):
     description = models.TextField(max_length=2000)
-    _from = models.DateField()
-    to = models.DateField()
+    experience = DateRangeField()
     employer = models.CharField(max_length=255)
     position = models.CharField(max_length=150)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
