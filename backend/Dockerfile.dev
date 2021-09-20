@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Update pip setuptools and download poetry
-RUN pip install --no-cache-dir --upgrade pip setuptools && pip --no-cache-dir install poetry
+RUN pip install --no-cache-dir --upgrade pip setuptools poetry
 
 # Set work directory
 WORKDIR /backend
