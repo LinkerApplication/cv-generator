@@ -9,12 +9,18 @@ class Profile(models.Model):
     number = models.CharField(max_length=15)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
     website = models.URLField(blank=True)
-    works = models.ManyToManyField('WorksPlace', blank=True)
 
     def __str__(self):
         return self.full_name
 
 
-class WorksPlace(models.Model):
-    profession = models.CharField(max_length=150)
-    experience = models.PositiveSmallIntegerField(max_length=2)
+class Experience(models.Model):
+    description = models.TextField(max_length=2000)
+    experience = models.PositiveSmallIntegerField()
+    firm = models.CharField(max_length=255)
+    position = models.CharField(max_length=150)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
+    used_technology = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.profile.full_name}: {self.firm}'
