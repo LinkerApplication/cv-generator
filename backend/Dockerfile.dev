@@ -1,0 +1,18 @@
+# Pull base image
+FROM python:3.9
+
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
+
+# Update pip setuptools and download poetry
+RUN pip install --no-cache-dir --upgrade pip setuptools poetry
+
+# Set work directory
+WORKDIR /backend
+# Copy only requirements to cache them in docker layer
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-interaction
