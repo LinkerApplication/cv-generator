@@ -36,7 +36,6 @@ services:
       PGADMIN_LISTEN_PORT: 5050
     ports:
       - "5050:5050"
-    restart: always
     container_name: cv_generator_backend_pg_admin
     volumes:
       - pgadmin-data:/var/lib/pgadmin
