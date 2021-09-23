@@ -28,5 +28,17 @@ services:
     container_name: cv_generator_db
     volumes:
       - db-data:/var/lib/postgresql/data
+  pg_admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - "5050:5050"
+    container_name: cv_generator_backend_pg_admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
 volumes:
   db-data:
+  pgadmin-data:
