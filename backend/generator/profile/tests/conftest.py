@@ -2,10 +2,14 @@
 #
 # import pytest
 # from django.contrib.auth.models import AnonymousUser
-# from pytest_factoryboy import register
+from pytest_factoryboy import register
 # from rest_framework.test import APIClient
 #
-# from .factories import UserFactory
+from .factories import ExperienceFactory, ProfileFactory, UserFactory
+
+register(ExperienceFactory)
+register(ProfileFactory)
+register(UserFactory)
 #
 # TODO : Uncomment after integration custom user model
 # class UserMaker(Protocol):

@@ -12,6 +12,14 @@ class UserFactory(factory.Factory):
     username = factory.Faker("name")
     email = factory.Faker("email")
 
+    # Change profile to a post_generation hook
+    @factory.post_generation
+    def profile(self, create, extracted):
+        if not create:
+            return
+        if extracted is None:
+            ProfileFactory(user=self)
+
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     class Meta:
