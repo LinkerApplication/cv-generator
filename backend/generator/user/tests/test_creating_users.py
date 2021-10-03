@@ -22,14 +22,14 @@ def test_create_user():
         User.objects.create_user()
     with pytest.raises(TypeError):
         User.objects.create_user(email='')
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         User.objects.create_user(email='', password="foo")
 
 
 @pytest.mark.django_db
 def test_create_superuser():
     User = get_user_model()
-    admin_user = User.objects.create_superuser(email='super@user.com', password='foo')
+    admin_user = User.objects.create_superuser(email='super@user.com', password='foo', is_superuser=True)
     assert admin_user.email == 'super@user.com'
     assert admin_user.is_active
     assert admin_user.is_staff
