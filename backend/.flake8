@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 120
+filename = *.py
+exclude =
+    .mypy_cache/,
+    .pytest_cache/,
+    **/migrations/,
+    **/__init__.py
