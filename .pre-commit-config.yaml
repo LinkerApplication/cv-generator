@@ -29,3 +29,11 @@ repos:
         files: backend/generator
         args:
           - --ignore-missing-imports
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+        args:
+          - --known-local-folder=generator/
+          - --line-length=120
