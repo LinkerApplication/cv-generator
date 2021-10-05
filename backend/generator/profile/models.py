@@ -8,7 +8,9 @@ class Profile(models.Model):
     email = models.EmailField(max_length=150)
     full_name = models.CharField(max_length=255)
     number = models.CharField(max_length=15)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True
+    )
     website = models.URLField(blank=True)
 
     def __str__(self):
@@ -20,7 +22,9 @@ class Experience(models.Model):
     experience = DateRangeField()
     employer = models.CharField(max_length=255)
     position = models.CharField(max_length=150)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="experiences"
+    )
 
     def __str__(self):
-        return f'{self.profile.full_name}: {self.employer}'
+        return f"{self.profile.full_name}: {self.employer}"
