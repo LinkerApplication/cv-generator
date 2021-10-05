@@ -20,3 +20,8 @@ exclude = '''
 profile = 'black'
 src_paths = ["backend"]
 multi_line_output = 3
+
+[mypy]
+files = 'generator'
+warn_return_any = true
+ignore_missing_imports = true
