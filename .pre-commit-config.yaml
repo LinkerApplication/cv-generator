@@ -12,6 +12,7 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
 
+  # The code checkers for the backend project part
   - repo: https://github.com/ambv/black
     rev: stable
     hooks:
@@ -35,3 +36,5 @@ repos:
     hooks:
       - id: isort
         exclude: ^frontend/
+
+  # The code checkers for the frontend project part

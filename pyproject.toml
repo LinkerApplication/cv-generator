@@ -18,4 +18,5 @@ exclude = '''
 
 [tool.isort]
 profile = 'black'
+src_paths = ["backend"]
 multi_line_output = 3
