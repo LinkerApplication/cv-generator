@@ -53,7 +53,6 @@ def test_create_superuser():
 @pytest.mark.django_db
 def test_negative_create_superuser():
     User = get_user_model()
-    admin_user = User.objects.create_superuser(email='super@user.com', password='foo')
 
     with pytest.raises(ValueError):
         User.objects.create_superuser(

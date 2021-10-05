@@ -1,7 +1,6 @@
-from django.contrib.auth.base_user import BaseUserManager
-from django.db.models.fields import EmailField, CharField
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.contrib.auth.base_user import BaseUserManager
+from django.utils.translation import ugettext_lazy as _
 
 
 class UserManager(BaseUserManager):
