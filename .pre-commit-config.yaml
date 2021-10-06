@@ -1,8 +1,14 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
-exclude: '.git|.tox'
-default_stages: [commit]
-fail_fast: true
+exclude:
+  (?x)^(
+      .*/migrations/.* |
+      .*/__init__.py |
+      \.git |
+      \.tox
+  )$
+
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
@@ -13,6 +19,12 @@ repos:
       - id: check-added-large-files
 
   # The code checkers for the backend project part
+  - repo: https://github.com/pycqa/isort
+    rev: 5.9.3
+    hooks:
+      - id: isort
+        exclude: ^frontend/
+
   - repo: https://github.com/ambv/black
     rev: 21.9b0
     hooks:
@@ -29,12 +41,6 @@ repos:
     rev: v0.910-1
     hooks:
       - id: mypy
-        exclude: ^frontend/
-
-  - repo: https://github.com/pycqa/isort
-    rev: 5.9.3
-    hooks:
-      - id: isort
         exclude: ^frontend/
 
   # The code checkers for the frontend project part
