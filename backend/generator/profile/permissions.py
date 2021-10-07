@@ -31,3 +31,10 @@ class ExperienceUpdateDestroyPermission(permissions.BasePermission):
         return bool(request.user and request.user.is_authenticated
                     and (obj.profile == request.user.profile)
                     and request.user.profile)
+
+
+class CreateProfileOnlyOneTime(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated
+                    and not request.user.profile)

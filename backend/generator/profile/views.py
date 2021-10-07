@@ -1,4 +1,4 @@
-from rest_framework import mixins
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 
@@ -6,33 +6,27 @@ from .models import Profile, Experience
 from .serializers import (ProfileSerializer,
                           SerializerCreateExperience)
 from .permissions import (OnlyUserProfileOrReadOnlyPermission,
-                          ExperienceUpdateDestroyPermission, CreateExperiencePermission)
+                          ExperienceUpdateDestroyPermission, CreateExperiencePermission, CreateProfileOnlyOneTime)
 
 
-class CreateView(mixins.CreateModelMixin,
-                 GenericViewSet):
-
+class CreateView(generics.CreateAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [CreateProfileOnlyOneTime]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 
-class ProfileUpdateDestroyRetrieveView(mixins.RetrieveModelMixin,
-                                       mixins.UpdateModelMixin,
-                                       mixins.DestroyModelMixin,
-                                       GenericViewSet):
+class ProfileUpdateDestroyRetrieveView(generics.RetrieveAPIView,
+                                       generics.UpdateAPIView,
+                                       generics.DestroyAPIView):
+
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [OnlyUserProfileOrReadOnlyPermission]
 
 
-
-
-class CreateExperienceView(mixins.CreateModelMixin,
-                           GenericViewSet):
-
+class CreateExperienceView(generics.CreateAPIView):
     serializer_class = SerializerCreateExperience
     permission_classes = [CreateExperiencePermission]
 
@@ -40,10 +34,9 @@ class CreateExperienceView(mixins.CreateModelMixin,
         serializer.save(profile=self.request.user.profile)
 
 
-class ExperienceUpdateDestroyView(mixins.RetrieveModelMixin,
-                                  mixins.UpdateModelMixin,
-                                  mixins.DestroyModelMixin,
-                                  GenericViewSet):
+class ExperienceUpdateDestroyView(generics.RetrieveAPIView,
+                                  generics.UpdateAPIView,
+                                  generics.DestroyAPIView):
 
     queryset = Experience.objects.all()
     serializer_class = SerializerCreateExperience
