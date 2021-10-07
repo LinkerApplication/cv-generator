@@ -1,0 +1,27 @@
+[tool.black]
+line-length = 120
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = 'black'
+src_paths = ["backend"]
+multi_line_output = 3
+
+[mypy]
+files = 'generator'
+warn_return_any = true
+ignore_missing_imports = true
