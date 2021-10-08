@@ -1,0 +1,27 @@
+name: Test building prod image
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: LinkerApplication/actions/image-build@v1
+      with:
+        image-name: prod-image
+        context: backend
+        dockerfile-name: backend/Dockerfile
+
+    - name: Test Debug is OFF
+      run: |
+        debug_val=$(docker inspect $IMAGE_NAME:$IMAGE_TAG | jq '.[] | .Config.Env | map(split("=") | {(.[0]): .[1]}) | add | .DEBUG')
+        case ${debug_val,,} in
+          *"1"* | *"true"* | *"yes"*)
+            echo "DEBUG should be turned off"
+            exit 1
+            ;;
+        esac
