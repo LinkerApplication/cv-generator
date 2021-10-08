@@ -13,6 +13,7 @@ jobs:
     - uses: LinkerApplication/actions/image-build@v1
       with:
         image-name: prod-image
+        context: backend
         dockerfile-name: backend/Dockerfile
 
     - name: Test Debug is OFF
