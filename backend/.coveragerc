@@ -1,6 +1,6 @@
 [run]
 branch = True
-source = backend
+source = generator
 omit =
     **/tests/*
     **/core/*
