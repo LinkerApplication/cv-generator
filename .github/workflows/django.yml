@@ -52,17 +52,20 @@ jobs:
       #----------------------------------------------
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd backend
-          poetry install --no-interaction
+        working-directory: ./backend
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install library
+        working-directory: ./backend
+        run: poetry install --no-interaction
       #----------------------------------------------
       #    run test suite and output coverage file
       #----------------------------------------------
       - name: Run Tests
-        env:
-          DEBUG: 1
-        run: |
-          pytest --tb=no --cov --cov-report=xml --cov-report=term
+        working-directory: ./backend
+        run: pytest --tb=no --cov --cov-report=xml --cov-report=term
       #----------------------------------------------
       #             upload coverage stats
       #----------------------------------------------
@@ -100,13 +103,18 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd backend
-          poetry install --no-interaction
+        working-directory: ./backend
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install library
+        working-directory: ./backend
+        run: poetry install --no-interaction
 
       - name: Correct Import
         run: |
-          isort
+          isort .
 
   formatter-check:
     runs-on: ubuntu-latest
@@ -135,13 +143,18 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd backend
-          poetry install --no-interaction
+        working-directory: ./backend
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install library
+        working-directory: ./backend
+        run: poetry install --no-interaction
 
       - name: Checking typing
         run: |
-          black --check
+          black . --check
 
   linting-check:
     runs-on: ubuntu-latest
@@ -170,13 +183,18 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd backend
-          poetry install --no-interaction
+        working-directory: ./backend
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install library
+        working-directory: ./backend
+        run: poetry install --no-interaction
 
       - name: Correct Import
         run: |
-          flake8
+          flake8 .
 
   typing-check:
     runs-on: ubuntu-latest
@@ -205,10 +223,15 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          cd backend
-          poetry install --no-interaction
+        working-directory: ./backend
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install library
+        working-directory: ./backend
+        run: poetry install --no-interaction
 
       - name: Checking typing
         run: |
-          mypy
+          mypy .
