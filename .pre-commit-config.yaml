@@ -4,6 +4,7 @@ exclude:
   (?x)^(
       .*/migrations/.* |
       .*/__init__.py |
+      \.github |
       \.git |
       \.tox
   )$
@@ -29,6 +30,7 @@ repos:
     rev: 21.9b0
     hooks:
       - id: black
+        args: [--config=./pyproject.toml]
         exclude: ^frontend/
 
   - repo: https://github.com/pycqa/flake8

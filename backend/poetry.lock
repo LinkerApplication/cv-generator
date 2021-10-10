@@ -101,7 +101,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "coverage"
 version = "6.0.1"
 description = "Code coverage measurement for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -665,7 +665,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "54bc8756cb8ae426ef492c45e6b15d9e7670d1c49d095b87064698fde558b9ef"
+content-hash = "ad2ceb8a65b0898fc72409f2bec875fdfed93cbbd4edf80cd3dac86d5abb9a20"
 
 [metadata.files]
 asgiref = [

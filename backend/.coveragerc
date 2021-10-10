@@ -1,0 +1,18 @@
+[run]
+branch = True
+source = generator
+omit =
+    **/tests/*
+    **/core/*
+    **/users/*
+    **/migrations/*
+    **/manage.py
+    **/urls.py
+    **/apps.py
+    **/admin.py
+    **/utils/*
+
+[report]
+exclude_lines =
+    def __str__
+    def __repr__
