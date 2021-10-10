@@ -56,20 +56,12 @@ jobs:
           cd backend
           poetry install --no-interaction --no-root
       #----------------------------------------------
-      # install your root project, if required
-      #----------------------------------------------
-      - name: Install library
-        run: |
-          cd backend
-          poetry install --no-interaction
-      #----------------------------------------------
       #    run test suite and output coverage file
       #----------------------------------------------
       - name: Run Tests
         env:
           DEBUG: 1
         run: |
-          cd backend
           pytest --tb=no --cov --cov-report=xml --cov-report=term
       #----------------------------------------------
       #             upload coverage stats
