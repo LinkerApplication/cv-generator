@@ -70,7 +70,7 @@ jobs:
       #             upload coverage stats
       #----------------------------------------------
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v1
         with:
           file: ./coverage.xml
           flags: unittests
@@ -96,7 +96,7 @@ jobs:
       #          install and run linters
       #----------------------------------------------
       - name: Install linters
-        run: python -m pip install black flake8 isort
+        run: python -m pip install black flake8 isort mypy
       - name: Run Isort
         run: isort backend/
 #      - name: Run Black
