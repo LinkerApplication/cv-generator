@@ -5,10 +5,12 @@ from django.contrib.auth.models import AnonymousUser
 from pytest_factoryboy import register
 from rest_framework.test import APIClient, APIRequestFactory
 
+from profile.tests.factories import ProfileFactory
 from user.models import User
-from users.tests.factories import UserFactory
+from user.tests.factories import UserFactory
 
 register(UserFactory)
+register(ProfileFactory)
 
 
 class UserMaker(Protocol):
