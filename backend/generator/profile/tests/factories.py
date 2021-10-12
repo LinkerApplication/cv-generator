@@ -9,8 +9,8 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 
     about_me = factory.Faker('text')
     email = factory.Faker('email')
-    full_name = factory.Faker('char')
-    number = factory.Faker('char')
+    full_name = factory.Faker('name')
+    number = factory.Faker('phone')
     website = factory.Faker('url')
 
 
@@ -19,7 +19,7 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
         model = 'profile.Experience'
 
     description = factory.Faker('text')
-    employer = factory.Faker('char')
+    employer = factory.Faker('company')
     position = factory.Faker('position')
     profile = factory.SubFactory(ProfileFactory)
 
