@@ -24,10 +24,9 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
     profile = factory.SubFactory(ProfileFactory)
 
     @factory.lazy_attribute
-    def experience(self, year, month, day):
-        date_range = {
-            'lower': datetime.date(year, month, day).isoformat(),
-            'upper': datetime.time().isoformat()
-        }
+    def lower(self, year, month, day):
+        return datetime.date(year, month, day).isoformat()
 
-        return date_range
+    @factory.lazy_attribute
+    def upper(self, year, month, day):
+        return datetime.date(year, month, day).isoformat()
