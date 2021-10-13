@@ -1,17 +1,16 @@
 from rest_framework import serializers
-from drf_extra_fields.fields import DateRangeField
 
 from .models import Profile, Experience
 
 
 class SerializerCreateExperience(serializers.ModelSerializer):
-    experience = DateRangeField()
 
     class Meta:
         model = Experience
         fields = (
              'description', 'experience',
              'employer', 'position',
+             'since', 'until'
         )
 
 

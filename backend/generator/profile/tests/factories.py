@@ -15,6 +15,14 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 
 
 class ExperienceFactory(factory.django.DjangoModelFactory):
+    """
+    Factory of Experience and subFactory of Profile
+    
+    @param description: str
+    @param employer: str
+    @param position: str
+    @param profile: ProfileFactory
+    """
     class Meta:
         model = 'profile.Experience'
 
@@ -24,9 +32,15 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
     profile = factory.SubFactory(ProfileFactory)
 
     @factory.lazy_attribute
-    def lower(self, year, month, day):
+    def since(self, year: int, month: int, day: int):
+        """
+        Creating date for field 'since'
+        """ 
         return datetime.date(year, month, day).isoformat()
 
     @factory.lazy_attribute
-    def upper(self, year, month, day):
+    def until(self, year: int, month: int, day: int):
+        """
+        Creating date for field 'until'
+        """
         return datetime.date(year, month, day).isoformat()
