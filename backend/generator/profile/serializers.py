@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Profile, Experience
+from .validators import check_that_until_more_than_until
 
 
 class SerializerCreateExperience(serializers.ModelSerializer):
@@ -24,6 +25,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             'email', 'full_name',
             'number', 'about_me',
             'website', 'user',
-            'experiences',
+            'since', 'until',
             'pk',
         )
+
+    def validate(self, attrs):
+        check_that_until_more_than_until(attrs.get('since'), attrs.get('until'))

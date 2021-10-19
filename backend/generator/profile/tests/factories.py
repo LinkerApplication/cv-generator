@@ -16,12 +16,8 @@ class ProfileFactory(factory.django.DjangoModelFactory):
 
 class ExperienceFactory(factory.django.DjangoModelFactory):
     """
-    Factory of Experience and subFactory of Profile
-    
-    @param description: str
-    @param employer: str
-    @param position: str
-    @param profile: ProfileFactory
+    Factory for a separate experience, which belongs to a certain Profile
+    Default since date is a fuzzy date between 1.1.1970 and yesterday.
     """
     class Meta:
         model = 'profile.Experience'
@@ -30,17 +26,7 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
     employer = factory.Faker('company')
     position = factory.Faker('position')
     profile = factory.SubFactory(ProfileFactory)
-
-    @factory.lazy_attribute
-    def since(self, year: int, month: int, day: int):
-        """
-        Creating date for field 'since'
-        """ 
-        return datetime.date(year, month, day).isoformat()
-
-    @factory.lazy_attribute
-    def until(self, year: int, month: int, day: int):
-        """
-        Creating date for field 'until'
-        """
-        return datetime.date(year, month, day).isoformat()
+    since = factory.fuzzy.FuzzyDate(
+        datetime.date(1970, 1, 1),
+        datetime.date.today() - datetime.timdelta(days=1)
+    )
