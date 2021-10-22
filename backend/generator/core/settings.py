@@ -1,3 +1,4 @@
+import datetime
 import os
 from pathlib import Path
 
@@ -23,12 +24,22 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # other apps
     "rest_framework",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
     # our apps
     "profile",
     "user",
 ]
 
 AUTH_USER_MODEL = "user.User"
+
+# Is required for allauth for registration
+# https://django-allauth.readthedocs.io/en/latest/installation.html
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -39,6 +50,24 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ]
+}
+
+# Setup the JWT authorization
+# https://dj-rest-auth.readthedocs.io/en/latest/installation.html#json-web-token-jwt-support-optional
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = "cv-generator-auth"
+JWT_AUTH_REFRESH_COOKIE = "cv-generator-refresh-token"
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+JWT_AUTH_SECURE = False
+# Every time user refreshes their token, new refresh-token is provided
+SIMPLE_JWT = {"REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=30), "ROTATE_REFRESH_TOKENS": True}
 
 ROOT_URLCONF = "core.urls"
 
