@@ -1,10 +1,9 @@
-from django.urls import path
+from rest_framework import routers
 
 from . import views
 
-urlpatterns = [
-    path('profiles/', views.CreateView.as_view()),
-    path('profiles/<int:pk>/', views.ProfileUpdateDestroyRetrieveView.as_view()),
-    path('experiences/', views.CreateExperienceView.as_view()),
-    path('experiences/<int:pk>/', views.ExperienceUpdateDestroyView.as_view()),
-]
+
+router = routers.DefaultRouter()
+router.register(r'profiles', views.ProfileViewSet, basename='profile')
+router.register(r'experiences', views.ExperienceViewSet, basename='experience')
+

@@ -1,5 +1,5 @@
+from  factory.fuzzy import FuzzyDate
 import datetime
-
 import factory
 
 
@@ -26,7 +26,7 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
     employer = factory.Faker('company')
     position = factory.Faker('position')
     profile = factory.SubFactory(ProfileFactory)
-    since = factory.fuzzy.FuzzyDate(
+    since = FuzzyDate(
         datetime.date(1970, 1, 1),
-        datetime.date.today() - datetime.timdelta(days=1)
+        datetime.date.today() - datetime.timedelta(days=1)
     )
