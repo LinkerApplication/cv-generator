@@ -65,9 +65,19 @@ JWT_AUTH_REFRESH_COOKIE = "cv-generator-refresh-token"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+# Django-allauth settings for using Custom User Model without username field
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+
 JWT_AUTH_SECURE = False
 # Every time user refreshes their token, new refresh-token is provided
-SIMPLE_JWT = {"REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=30), "ROTATE_REFRESH_TOKENS": True}
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+}
 
 ROOT_URLCONF = "core.urls"
 
