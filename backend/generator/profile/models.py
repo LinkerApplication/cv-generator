@@ -21,6 +21,6 @@ class Experience(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
     since = models.DateField()
     until = models.DateField(blank=True, null=True)
-    
+
     def __str__(self):
-        return f'{self.profile.full_name}: {self.employer}'
+        return f"{self.profile.full_name}: {self.employer}"

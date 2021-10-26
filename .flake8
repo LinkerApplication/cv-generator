@@ -1,0 +1,14 @@
+[flake8]
+
+# E203 - See https://github.com/PyCQA/pycodestyle/issues/373
+# E501 - Line lengths are recommended to be no greater than 79 characters.
+# Some rules contradict each other, like W503/W504
+
+ignore = E203, E501, W503, W504
+max-line-length = 120
+filename = *.py
+exclude =
+    .mypy_cache/,
+    .pytest_cache/,
+    **/migrations/,
+    **/__init__.py,

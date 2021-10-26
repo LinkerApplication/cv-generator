@@ -16,26 +16,57 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('about_me', models.TextField(blank=True)),
-                ('email', models.EmailField(max_length=150)),
-                ('full_name', models.CharField(max_length=255)),
-                ('number', models.CharField(max_length=15)),
-                ('website', models.URLField(blank=True)),
-                ('user', models.OneToOneField(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("about_me", models.TextField(blank=True)),
+                ("email", models.EmailField(max_length=150)),
+                ("full_name", models.CharField(max_length=255)),
+                ("number", models.CharField(max_length=15)),
+                ("website", models.URLField(blank=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Experience',
+            name="Experience",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(max_length=2000)),
-                ('experience', django.contrib.postgres.fields.ranges.DateRangeField()),
-                ('employer', models.CharField(max_length=255)),
-                ('position', models.CharField(max_length=150)),
-                ('profile', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='experiences', to='profile.profile')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("description", models.TextField(max_length=2000)),
+                ("experience", django.contrib.postgres.fields.ranges.DateRangeField()),
+                ("employer", models.CharField(max_length=255)),
+                ("position", models.CharField(max_length=150)),
+                (
+                    "profile",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="experiences",
+                        to="profile.profile",
+                    ),
+                ),
             ],
         ),
     ]
