@@ -33,7 +33,8 @@ def test_get_profile_retrieve(
             ('employer', experience.employer),
             ('position', experience.position),
             ('since', str(experience.since)),
-            ('until', (experience.until if experience.until is None
+            ('until', (experience.until
+                       if experience.until is None
                        else str(experience.until)))]
         )],
         "pk": profile.pk,
