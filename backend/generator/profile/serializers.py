@@ -13,6 +13,9 @@ class SerializerExperience(serializers.ModelSerializer):
                   "since",
                   "until")
 
+    def validate(self, attrs):
+        validate_until_is_after_since(attrs.get("since"), attrs.get("until"))
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     user = serializers.SlugRelatedField(read_only=True, slug_field="email")
@@ -28,10 +31,5 @@ class ProfileSerializer(serializers.ModelSerializer):
             "website",
             "user",
             "experiences",
-            "since",
-            "until",
             "pk",
         )
-
-    def validate(self, attrs):
-        validate_until_is_after_since(attrs.get("since"), attrs.get("until"))

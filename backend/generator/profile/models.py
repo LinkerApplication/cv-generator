@@ -6,7 +6,7 @@ class Profile(models.Model):
     about_me = models.TextField(blank=True)
     email = models.EmailField(max_length=150)
     full_name = models.CharField(max_length=255)
-    number = models.CharField(max_length=15)
+    number = models.CharField(max_length=255)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None, null=True)
     website = models.URLField(blank=True)
 

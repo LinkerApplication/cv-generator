@@ -11,7 +11,7 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     about_me = factory.Faker("text")
     email = factory.Faker("email")
     full_name = factory.Faker("name")
-    number = factory.Faker("phone")
+    number = factory.Faker("phone_number")
     website = factory.Faker("url")
 
 
@@ -26,6 +26,6 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
 
     description = factory.Faker("text")
     employer = factory.Faker("company")
-    position = factory.Faker("position")
+    position = factory.Faker("job")
     profile = factory.SubFactory(ProfileFactory)
-    since = FuzzyDate(datetime.date(1970, 1, 1), datetime.date.today() - datetime.timedelta(days=1))
+    since = factory.Faker('date_object')
