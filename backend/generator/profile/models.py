@@ -18,7 +18,7 @@ class Experience(models.Model):
     description = models.TextField(max_length=2000)
     employer = models.CharField(max_length=255)
     position = models.CharField(max_length=150)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='experiences')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="experiences")
     since = models.DateField()
     until = models.DateField(blank=True, null=True)
 
