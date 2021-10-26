@@ -1,4 +1,4 @@
-from profile.tests.factories import ProfileFactory
+from profile.tests.factories import ProfileFactory, ExperienceFactory
 from typing import Protocol, Type, Union
 
 import pytest
@@ -10,6 +10,7 @@ from user.tests.factories import UserFactory
 
 register(UserFactory)
 register(ProfileFactory)
+register(ExperienceFactory)
 
 
 class UserMaker(Protocol):

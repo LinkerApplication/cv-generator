@@ -3,7 +3,7 @@ from contextlib import contextmanager
 import pytest
 from rest_framework.serializers import ValidationError
 
-from generator.profile.validators import validate_until_is_after_since
+from ..validators import validate_until_is_after_since
 
 
 @contextmanager

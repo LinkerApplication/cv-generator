@@ -7,7 +7,11 @@ from .validators import validate_until_is_after_since
 class SerializerExperience(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ("description", "experience", "employer", "position", "since", "until")
+        fields = ("description",
+                  "employer",
+                  "position",
+                  "since",
+                  "until")
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -23,6 +27,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "about_me",
             "website",
             "user",
+            "experiences",
             "since",
             "until",
             "pk",
