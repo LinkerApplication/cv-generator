@@ -126,9 +126,7 @@ def test_user_who_not_create_profile_trying_to_update_delete_experience(
 
     experience = experience_factory(profile=profile)
 
-    response = client.patch(
-        reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"}
-    )
+    response = client.patch(reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"})
 
     assert response.status_code == 403
 
