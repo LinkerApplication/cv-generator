@@ -5,7 +5,7 @@ from .models import Experience, Profile
 from .permissions import (
     CreateExperiencePermission,
     CreateProfileOnlyOneTime,
-    ExperienceUpdateDestroyPermission,
+    ExperienceRetrieveUpdateDestroyPermission,
     OnlyUserProfileOrReadOnlyPermission,
 )
 from .serializers import ProfileSerializer, SerializerExperience
@@ -21,7 +21,7 @@ class ProfileViewSet(
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [OnlyUserProfileOrReadOnlyPermission]
-    permission_class_action_mapping = {"create": CreateProfileOnlyOneTime}
+    permission_class_action_mapping = {"create": [CreateProfileOnlyOneTime]}
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -42,13 +42,14 @@ class ExperienceViewSet(
 ):
     queryset = Experience.objects.all()
     serializer_class = SerializerExperience
-    permission_classes = [ExperienceUpdateDestroyPermission]
-    permission_class_action_mapping = {"create": CreateExperiencePermission}
+    permission_classes = [ExperienceRetrieveUpdateDestroyPermission]
+    permission_class_action_mapping = {"create": [CreateExperiencePermission]}
 
     def perform_create(self, serializer):
         serializer.save(profile=self.request.user.profile)
 
     def get_permissions(self):
+        print(self.action)
         return [
             permission()
             for permission in self.permission_class_action_mapping.get(self.action, self.permission_classes)

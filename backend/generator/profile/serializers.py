@@ -7,14 +7,11 @@ from .validators import validate_until_is_after_since
 class SerializerExperience(serializers.ModelSerializer):
     class Meta:
         model = Experience
-        fields = ("description",
-                  "employer",
-                  "position",
-                  "since",
-                  "until")
+        fields = ("description", "employer", "position", "since", "until")
 
     def validate(self, attrs):
         validate_until_is_after_since(attrs.get("since"), attrs.get("until"))
+        return attrs
 
 
 class ProfileSerializer(serializers.ModelSerializer):

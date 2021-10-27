@@ -1,7 +1,4 @@
-import datetime
-
 import factory
-from factory.fuzzy import FuzzyDate
 
 
 class ProfileFactory(factory.django.DjangoModelFactory):
@@ -28,4 +25,4 @@ class ExperienceFactory(factory.django.DjangoModelFactory):
     employer = factory.Faker("company")
     position = factory.Faker("job")
     profile = factory.SubFactory(ProfileFactory)
-    since = factory.Faker('date_object')
+    since = factory.Faker("date_object")

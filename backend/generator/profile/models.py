@@ -11,7 +11,7 @@ class Profile(models.Model):
     website = models.URLField(blank=True)
 
     def __str__(self):
-        return self.full_name, str(self.pk)
+        return self.full_name
 
 
 class Experience(models.Model):

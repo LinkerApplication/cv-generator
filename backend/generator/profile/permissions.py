@@ -1,5 +1,4 @@
 from rest_framework import permissions
-from rest_framework.permissions import SAFE_METHODS
 
 
 class OnlyUserProfileOrReadOnlyPermission(permissions.BasePermission):
@@ -7,12 +6,7 @@ class OnlyUserProfileOrReadOnlyPermission(permissions.BasePermission):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
-        return bool(
-            request.method in SAFE_METHODS
-            or request.user
-            and request.user.is_authenticated
-            and (obj.user == request.user)
-        )
+        return bool(request.user.is_authenticated and (obj.user == request.user))
 
 
 class CreateExperiencePermission(permissions.BasePermission):
@@ -20,22 +14,34 @@ class CreateExperiencePermission(permissions.BasePermission):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
-        return bool(request.user and request.user.is_authenticated and request.user.profile)
+        try:
+            has_profile = request.user.profile
+        except Exception:
+            has_profile = False
+
+        return bool(request.user and request.user.is_authenticated and has_profile)
 
 
-class ExperienceUpdateDestroyPermission(permissions.BasePermission):
+class ExperienceRetrieveUpdateDestroyPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         """
         Return `True` if permission is granted, `False` otherwise.
         """
+        try:
+            has_profile = request.user.profile
+        except Exception:
+            has_profile = False
+
         return bool(
-            request.user
-            and request.user.is_authenticated
-            and (obj.profile == request.user.profile)
-            and request.user.profile
+            request.user and request.user.is_authenticated and has_profile and (obj.profile == request.user.profile)
         )
 
 
 class CreateProfileOnlyOneTime(permissions.BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and not request.user.profile)
+        try:
+            has_profile = request.user.profile
+        except Exception:
+            has_profile = False
+
+        return bool(request.user and request.user.is_authenticated and not has_profile)

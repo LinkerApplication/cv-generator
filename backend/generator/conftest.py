@@ -1,4 +1,4 @@
-from profile.tests.factories import ProfileFactory, ExperienceFactory
+from profile.tests.factories import ExperienceFactory, ProfileFactory
 from typing import Protocol, Type, Union
 
 import pytest
