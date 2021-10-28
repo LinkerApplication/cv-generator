@@ -161,3 +161,18 @@ def test_user_who_not_create_profile_trying_to_update_delete_profile(
     response = client.delete(reverse("profile-detail", kwargs={"pk": profile.id}))
 
     assert response.status_code == 403
+
+
+@pytest.mark.django_db
+def test_user_has_profile_trying_to_one_more(
+    profile_factory: Type[ProfileFactory],
+    registered_api_client: APIClient,
+):
+    profile = profile_factory()
+    registered_api_client.handler._force_user.save()
+    profile.user = registered_api_client.handler._force_user
+    profile.save()
+
+    response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
+
+    assert response.status_code == 403
