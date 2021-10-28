@@ -60,8 +60,8 @@ REST_FRAMEWORK = {
 # Setup the JWT authorization
 # https://dj-rest-auth.readthedocs.io/en/latest/installation.html#json-web-token-jwt-support-optional
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = "cv-generator-auth"
-JWT_AUTH_REFRESH_COOKIE = "cv-generator-refresh-token"
+JWT_AUTH_COOKIE = "gen-access"
+JWT_AUTH_REFRESH_COOKIE = "gen-refresh"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
