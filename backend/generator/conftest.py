@@ -5,6 +5,7 @@ import pytest
 from django.contrib.auth.models import AnonymousUser
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
+
 from user.models import User
 from user.tests.factories import UserFactory
 

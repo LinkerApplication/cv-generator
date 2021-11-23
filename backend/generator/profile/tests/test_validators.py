@@ -1,6 +1,8 @@
+from contextlib import nullcontext as does_not_raise_exception
+
 import pytest
 from rest_framework.serializers import ValidationError
-from contextlib import nullcontext as does_not_raise_exception
+
 from generator.profile.validators import validate_until_is_after_since
 
 

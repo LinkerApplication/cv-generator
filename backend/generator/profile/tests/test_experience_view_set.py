@@ -1,4 +1,3 @@
-from pprint import pprint
 from typing import Type
 
 import pytest
@@ -10,12 +9,12 @@ from generator.user.tests.factories import UserFactory
 from .factories import ExperienceFactory, ProfileFactory
 
 EXPERIENCE_DATA = {
-            "description": "experience.description",
-            "employer": "experience.employer",
-            "position": "experience.position",
-            "since": "2021-04-02",
-            "until": '',
-        }
+    "description": "experience.description",
+    "employer": "experience.employer",
+    "position": "experience.position",
+    "since": "2021-04-02",
+    "until": "",
+}
 
 
 @pytest.mark.django_db
@@ -34,12 +33,12 @@ def test_get_experience_retrieve(
 
     assert response.status_code == 200
     assert response.data == {
-            "description": experience.description,
-            "employer": experience.employer,
-            "position": experience.position,
-            "since": str(experience.since),
-            "until": None,
-        }
+        "description": experience.description,
+        "employer": experience.employer,
+        "position": experience.position,
+        "since": str(experience.since),
+        "until": None,
+    }
 
 
 @pytest.mark.django_db

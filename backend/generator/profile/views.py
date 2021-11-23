@@ -1,15 +1,11 @@
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.exceptions import PermissionDenied
 
 from .models import Experience, Profile
-from .permissions import (
-    ModifyExperienceOrReadOnlyPermission,
-    CanModifyProfileOrReadOnly
-)
-from .serializers import ProfileSerializer, ExperienceSerializer
-from .services import user_can_create_profile, user_can_create_experience
+from .permissions import CanModifyProfileOrReadOnly, ModifyExperienceOrReadOnlyPermission
+from .serializers import ExperienceSerializer, ProfileSerializer
+from .services import user_can_create_experience, user_can_create_profile
 
 
 class ProfileViewSet(

@@ -44,7 +44,7 @@ def test_get_profile_retrieve(
                 "employer": experience.employer,
                 "position": experience.position,
                 "since": str(experience.since),
-                "until": None
+                "until": None,
             },
         ],
         "pk": profile.pk,

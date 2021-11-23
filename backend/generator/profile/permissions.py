@@ -14,9 +14,11 @@ class ModifyExperienceOrReadOnlyPermission(permissions.BasePermission):
         """
         Return `True` if user can modify experience or read, `False` otherwise.
         """
-        has_profile = hasattr(request.user, 'profile')
+        has_profile = hasattr(request.user, "profile")
 
         return bool(
-            request.user and request.user.is_authenticated and has_profile and
-            experience.profile == request.user.profile
+            request.user
+            and request.user.is_authenticated
+            and has_profile
+            and experience.profile == request.user.profile
         )
