@@ -13,8 +13,8 @@ from .services import user_can_create_profile, user_can_create_experience
 
 
 class ProfileViewSet(
-    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
     GenericViewSet,
@@ -35,13 +35,10 @@ class ProfileViewSet(
 
         super().create(request, *args, **kwargs)
 
-    def perform_create(self, serializer) -> None:
-        serializer.save(user=self.request.user)
-
 
 class ExperienceViewSet(
-    mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
     GenericViewSet,

@@ -9,17 +9,13 @@ from generator.user.tests.factories import UserFactory
 
 from .factories import ExperienceFactory, ProfileFactory
 
-EXPERIENCE_DATA = OrderedDict(
-    (
-        {
+EXPERIENCE_DATA = {
             "description": "experience.description",
             "employer": "experience.employer",
             "position": "experience.position",
             "since": "experience.since",
             "until": '',
         }
-    )
-)
 
 
 @pytest.mark.django_db
@@ -30,6 +26,8 @@ def test_get_experience_retrieve(
 ):
     profile = profile_factory()
     profile.user = registered_api_client.handler._force_user
+    profile.save()
+
     experience = experience_factory(profile=profile)
 
     response = registered_api_client.get(reverse("experience-detail", kwargs={"pk": experience.id}))
@@ -51,7 +49,7 @@ def test_post_experience_create(
 ):
     profile = profile_factory()
     profile.user = registered_api_client.handler._force_user
-    print(profile.user)
+    profile.save()
 
     response = registered_api_client.post(reverse("experience-list"), data=EXPERIENCE_DATA)
 

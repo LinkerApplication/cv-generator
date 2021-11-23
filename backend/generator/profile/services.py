@@ -3,7 +3,6 @@ def user_can_create_profile(request):
     if user already has profile return False, else True
     """
     has_profile = hasattr(request.user, 'profile')
-    print(request.user)
 
     return bool(request.user and request.user.is_authenticated and not has_profile)
 

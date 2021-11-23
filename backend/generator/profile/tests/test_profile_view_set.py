@@ -27,6 +27,7 @@ def test_get_profile_retrieve(
 ):
     profile = profile_factory()
     profile.user = registered_api_client.handler._force_user
+    profile.save()
 
     experience = experience_factory(profile=profile)
     response = registered_api_client.get(reverse("profile-detail", kwargs={"pk": profile.id}))
@@ -38,14 +39,13 @@ def test_get_profile_retrieve(
         "number": profile.number,
         "about_me": profile.about_me,
         "website": profile.website,
-        "user": profile.user.email,
         "experiences": [
             {
                 "description": experience.description,
                 "employer": experience.employer,
                 "position": experience.position,
                 "since": str(experience.since),
-                "until": experience.until if experience.until is None else str(experience.until),
+                "until": None
             },
         ],
         "pk": profile.pk,
@@ -81,7 +81,6 @@ def test_post_profile_create(
     response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
 
     assert response.status_code == 201
-    assert response.data["user"] == registered_api_client.handler._force_user.email
 
 
 @pytest.mark.django_db
