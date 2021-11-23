@@ -33,7 +33,7 @@ class ProfileViewSet(
         if not user_can_create_profile(request):
             return Response(status=400)
 
-        super().create(request, *args, **kwargs)
+        return super().create(request, *args, **kwargs)
 
 
 class ExperienceViewSet(
@@ -58,7 +58,7 @@ class ExperienceViewSet(
         if not user_can_create_experience(request):
             return Response(status=400)
 
-        super().create(request, *args, **kwargs)
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer) -> None:
         serializer.save(profile=self.request.user.profile)
