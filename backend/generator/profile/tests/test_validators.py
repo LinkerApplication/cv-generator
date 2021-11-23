@@ -1,14 +1,7 @@
-from contextlib import contextmanager
-
 import pytest
 from rest_framework.serializers import ValidationError
-
-from ..validators import validate_until_is_after_since
-
-
-@contextmanager
-def does_not_raise_exception():
-    yield
+from contextlib import nullcontext as does_not_raise_exception
+from generator.profile.validators import validate_until_is_after_since
 
 
 @pytest.mark.parametrize(

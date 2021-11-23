@@ -4,7 +4,7 @@ from .models import Experience, Profile
 from .validators import validate_until_is_after_since
 
 
-class SerializerExperience(serializers.ModelSerializer):
+class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Experience
         fields = ("description", "employer", "position", "since", "until")
@@ -15,8 +15,7 @@ class SerializerExperience(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(read_only=True, slug_field="email")
-    experiences = SerializerExperience(many=True, read_only=True)
+    experiences = ExperienceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Profile
@@ -26,7 +25,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             "number",
             "about_me",
             "website",
-            "user",
             "experiences",
             "pk",
         )

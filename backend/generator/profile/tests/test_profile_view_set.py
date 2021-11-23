@@ -26,9 +26,7 @@ def test_get_profile_retrieve(
     registered_api_client: APIClient,
 ):
     profile = profile_factory()
-    registered_api_client.handler._force_user.save()
     profile.user = registered_api_client.handler._force_user
-    profile.save()
 
     experience = experience_factory(profile=profile)
     response = registered_api_client.get(reverse("profile-detail", kwargs={"pk": profile.id}))
@@ -42,15 +40,13 @@ def test_get_profile_retrieve(
         "website": profile.website,
         "user": profile.user.email,
         "experiences": [
-            OrderedDict(
-                [
-                    ("description", experience.description),
-                    ("employer", experience.employer),
-                    ("position", experience.position),
-                    ("since", str(experience.since)),
-                    ("until", (experience.until if experience.until is None else str(experience.until))),
-                ]
-            )
+            {
+                "description": experience.description,
+                "employer": experience.employer,
+                "position": experience.position,
+                "since": str(experience.since),
+                "until": experience.until if experience.until is None else str(experience.until),
+            },
         ],
         "pk": profile.pk,
     }
@@ -68,12 +64,10 @@ def test_user_who_not_create_profile_get_profile_retrieve(
     profile = profile_factory()
     if not anonymous:
         user = user_factory()
-        user.save()
         profile.user = user
         client = registered_api_client
     else:
         client = api_client
-    profile.save()
 
     response = client.get(reverse("profile-detail", kwargs={"pk": profile.id}))
 
@@ -84,7 +78,6 @@ def test_user_who_not_create_profile_get_profile_retrieve(
 def test_post_profile_create(
     registered_api_client: APIClient,
 ):
-    registered_api_client.handler._force_user.save()
     response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
 
     assert response.status_code == 201
@@ -97,20 +90,18 @@ def test_user_has_profile_trying_to_create_second_profile(
     registered_api_client: APIClient,
 ):
     profile = profile_factory()
-    registered_api_client.handler._force_user.save()
     profile.user = registered_api_client.handler._force_user
-    profile.save()
 
     response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
 
-    assert response.status_code == 403
+    assert response.status_code == 400
 
 
 @pytest.mark.django_db
 def test_anonymous_user_trying_to_create_profile(api_client: APIClient):
     response = api_client.post(reverse("profile-list"), data=PROFILE_DATA)
 
-    assert response.status_code == 403
+    assert response.status_code == 400
 
 
 @pytest.mark.django_db
@@ -119,7 +110,6 @@ def test_update_delete_profile(
     registered_api_client: APIClient,
 ):
     profile = profile_factory()
-    registered_api_client.handler._force_user.save()
     profile.user = registered_api_client.handler._force_user
     profile.save()
 
@@ -146,13 +136,10 @@ def test_user_who_not_create_profile_trying_to_update_delete_profile(
     profile = profile_factory()
     if not anonymous:
         user = user_factory()
-        user.save()
         profile.user = user
         client = registered_api_client
     else:
         client = api_client
-
-    profile.save()
 
     response = client.patch(reverse("profile-detail", kwargs={"pk": profile.id}), data={"email": "lala@mail.ru"})
 
@@ -169,10 +156,8 @@ def test_user_has_profile_trying_to_one_more(
     registered_api_client: APIClient,
 ):
     profile = profile_factory()
-    registered_api_client.handler._force_user.save()
     profile.user = registered_api_client.handler._force_user
-    profile.save()
 
     response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
 
-    assert response.status_code == 403
+    assert response.status_code == 400
