@@ -1,5 +1,3 @@
-from collections import OrderedDict
-from pprint import pprint
 from typing import Type
 
 import pytest
