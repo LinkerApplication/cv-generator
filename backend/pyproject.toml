@@ -13,6 +13,9 @@ psycopg2 = "^2.9.1"
 python-dotenv = "^0.19.0"
 gunicorn = "^20.1.0"
 coverage = "^6.0.1"
+dj-rest-auth = "^2.1.11"
+djangorestframework-simplejwt = "^5.0.0"
+django-allauth = "^0.45.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
