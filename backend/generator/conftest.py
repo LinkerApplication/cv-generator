@@ -36,7 +36,7 @@ def create_user(user_factory: Type[UserFactory]) -> UserMaker:
     return make_user  # type: ignore
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def api_client() -> APIClient:
     return APIClient()
 
