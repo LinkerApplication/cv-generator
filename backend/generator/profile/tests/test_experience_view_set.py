@@ -56,20 +56,22 @@ def test_post_experience_create(
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("anonymous", [(False,), (True,)])
+@pytest.mark.parametrize("anonymous, status_code", [(False, 400), (True, 401)])
 def test_post_user_doesnt_have_profile_create_experience(
     registered_api_client: APIClient,
     api_client: APIClient,
     anonymous: bool,
+    status_code: int,
 ):
     if not anonymous:
         client = registered_api_client
     else:
+        api_client.force_authenticate(None, None)
         client = api_client
 
     response = client.post(reverse("experience-list"), data=EXPERIENCE_DATA)
 
-    assert response.status_code == 400
+    assert response.status_code == status_code
 
 
 @pytest.mark.django_db
@@ -94,7 +96,7 @@ def test_update_delete_experience(
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("anonymous", [(False,), (True,)])
+@pytest.mark.parametrize("anonymous, status_code", [(False, 403), (True, 401)])
 def test_user_who_not_create_profile_trying_to_update_delete_experience(
     experience_factory: Type[ExperienceFactory],
     user_factory: Type[UserFactory],
@@ -102,6 +104,7 @@ def test_user_who_not_create_profile_trying_to_update_delete_experience(
     registered_api_client: APIClient,
     api_client: APIClient,
     anonymous: bool,
+    status_code: int,
 ):
     profile = profile_factory()
     if not anonymous:
@@ -109,17 +112,18 @@ def test_user_who_not_create_profile_trying_to_update_delete_experience(
         profile.user = user
         client = registered_api_client
     else:
+        api_client.force_authenticate(None, None)
         client = api_client
 
     experience = experience_factory(profile=profile)
 
     response = client.patch(reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"})
 
-    assert response.status_code == 403
+    assert response.status_code == status_code
 
     response = client.delete(reverse("experience-detail", kwargs={"pk": experience.id}))
 
-    assert response.status_code == 403
+    assert response.status_code == status_code
 
 
 @pytest.mark.django_db
@@ -138,7 +142,6 @@ def test_user_has_profile_but_experience_is_not_him_update_delete_experience(
         reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"}
     )
 
-    assert user != registered_api_client.handler._force_user
     assert response.status_code == 403
 
     response = registered_api_client.delete(reverse("experience-detail", kwargs={"pk": experience.id}))

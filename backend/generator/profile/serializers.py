@@ -1,3 +1,5 @@
+from typing import Any
+
 from rest_framework import serializers
 
 from .models import Experience, Profile
@@ -9,7 +11,7 @@ class ExperienceSerializer(serializers.ModelSerializer):
         model = Experience
         fields = ("description", "employer", "position", "since", "until")
 
-    def validate(self, attrs):
+    def validate(self, attrs: dict[str, Any]) -> dict[str, Any]:
         validate_until_is_after_since(attrs.get("since"), attrs.get("until"))
         return attrs
 

@@ -52,13 +52,14 @@ def test_get_profile_retrieve(
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("anonymous", [(False,), (True,)])
+@pytest.mark.parametrize("anonymous, status_code", [(False, 200), (True, 200)])
 def test_user_who_not_create_profile_get_profile_retrieve(
     profile_factory: Type[ProfileFactory],
     user_factory: Type[UserFactory],
     registered_api_client: APIClient,
     api_client: APIClient,
     anonymous: bool,
+    status_code: int,
 ):
     profile = profile_factory()
     if not anonymous:
@@ -66,11 +67,12 @@ def test_user_who_not_create_profile_get_profile_retrieve(
         profile.user = user
         client = registered_api_client
     else:
+        api_client.force_authenticate(None, None)
         client = api_client
 
     response = client.get(reverse("profile-detail", kwargs={"pk": profile.id}))
 
-    assert response.status_code == 403
+    assert response.status_code == status_code
 
 
 @pytest.mark.django_db
@@ -91,15 +93,14 @@ def test_user_has_profile_trying_to_create_second_profile(
     profile.user = registered_api_client.handler._force_user
 
     response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
-
     assert response.status_code == 400
 
 
 @pytest.mark.django_db
 def test_anonymous_user_trying_to_create_profile(api_client: APIClient):
+    api_client.force_authenticate(None, None)
     response = api_client.post(reverse("profile-list"), data=PROFILE_DATA)
-
-    assert response.status_code == 400
+    assert response.status_code == 401
 
 
 @pytest.mark.django_db
@@ -123,13 +124,14 @@ def test_update_delete_profile(
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("anonymous", [(False,), (True,)])
+@pytest.mark.parametrize("anonymous, status_code", [(False, 403), (True, 401)])
 def test_user_who_not_create_profile_trying_to_update_delete_profile(
     profile_factory: Type[ProfileFactory],
     user_factory: Type[UserFactory],
     registered_api_client: APIClient,
     api_client: APIClient,
     anonymous: bool,
+    status_code: int,
 ):
     profile = profile_factory()
     if not anonymous:
@@ -137,25 +139,13 @@ def test_user_who_not_create_profile_trying_to_update_delete_profile(
         profile.user = user
         client = registered_api_client
     else:
+        api_client.force_authenticate(None, None)
         client = api_client
 
     response = client.patch(reverse("profile-detail", kwargs={"pk": profile.id}), data={"email": "lala@mail.ru"})
 
-    assert response.status_code == 403
+    assert response.status_code == status_code
 
     response = client.delete(reverse("profile-detail", kwargs={"pk": profile.id}))
 
-    assert response.status_code == 403
-
-
-@pytest.mark.django_db
-def test_user_has_profile_trying_to_one_more(
-    profile_factory: Type[ProfileFactory],
-    registered_api_client: APIClient,
-):
-    profile = profile_factory()
-    profile.user = registered_api_client.handler._force_user
-
-    response = registered_api_client.post(reverse("profile-list"), data=PROFILE_DATA)
-
-    assert response.status_code == 400
+    assert response.status_code == status_code

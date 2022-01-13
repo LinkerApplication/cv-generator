@@ -1,15 +1,16 @@
 from rest_framework import permissions
+from rest_framework.permissions import SAFE_METHODS
 
 
-class CanModifyProfileOrReadOnly(permissions.BasePermission):
+class IsProfileOwnerPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, profile):
         """
         Return `True` if user has profile he can modify or read profile, `False` otherwise.
         """
-        return bool(request.user.is_authenticated and (profile.user == request.user))
+        return bool(request.method in SAFE_METHODS or request.user.is_authenticated and (profile.user == request.user))
 
 
-class ModifyExperienceOrReadOnlyPermission(permissions.BasePermission):
+class HasProfileAndIsOwnerPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, experience):
         """
         Return `True` if user can modify experience or read, `False` otherwise.
