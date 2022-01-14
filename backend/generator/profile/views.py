@@ -27,12 +27,15 @@ class ProfileViewSet(
     permission_classes = [IsAuthenticatedOrReadOnly, IsProfileOwnerPermission]
 
     def create(self, request, *args, **kwargs):
-        if not check_user_has_profile(request.user):
+        if check_user_has_profile(request.user):
             return Response(
                 {"error": "Cannot create profile, when you have profile already"}, status.HTTP_400_BAD_REQUEST
             )
 
         return super().create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class ExperienceViewSet(

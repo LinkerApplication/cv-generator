@@ -3,16 +3,7 @@ from .models import Profile
 
 def check_user_has_profile(user):
     """
-    if user already has profile return False, else True
-    """
-    has_profile = hasattr(user, "profile")
-
-    return bool(user and user.is_authenticated and not has_profile)
-
-
-def check_user_can_create_experience(user):
-    """
-    if user has profile return True, else False
+    if user already has profile return True, else False
     """
     has_profile = hasattr(user, "profile")
 
