@@ -98,14 +98,13 @@ def test_update_delete_experience(
 
 
 def _try_update_and_delete_experience(
-    profile: Type[ProfileFactory], status_code: int, client: APIClient, experience_factory: Type[ExperienceFactory]
+    experience_id, status_code: int, client: APIClient, experience_factory: Type[ExperienceFactory]
 ):
-    experience = experience_factory(profile=profile)
 
-    response = client.patch(reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"})
+    response = client.patch(reverse("experience-detail", kwargs={"pk": experience_id}), data={"since": "1970-01-01"})
     assert response.status_code == status_code
 
-    response = client.delete(reverse("experience-detail", kwargs={"pk": experience.id}))
+    response = client.delete(reverse("experience-detail", kwargs={"pk": experience_id}))
     assert response.status_code == status_code
 
 
@@ -120,8 +119,11 @@ def test_user_who_not_create_profile_trying_to_update_delete_experience_register
 
     user = user_factory()
     profile.user = user
+    experience = experience_factory(profile=profile)
 
-    _try_update_and_delete_experience(profile, status.HTTP_403_FORBIDDEN, registered_api_client, experience_factory)
+    _try_update_and_delete_experience(
+        experience.id, status.HTTP_403_FORBIDDEN, registered_api_client, experience_factory
+    )
 
 
 @pytest.mark.django_db
@@ -131,8 +133,9 @@ def test_user_who_not_create_profile_trying_to_update_delete_experience_anonymou
     api_client: APIClient,
 ):
     profile = profile_factory()
+    experience = experience_factory(profile=profile)
 
-    _try_update_and_delete_experience(profile, status.HTTP_401_UNAUTHORIZED, api_client, experience_factory)
+    _try_update_and_delete_experience(experience.id, status.HTTP_401_UNAUTHORIZED, api_client, experience_factory)
 
 
 @pytest.mark.django_db
@@ -147,12 +150,6 @@ def test_user_has_profile_but_experience_is_not_him_update_delete_experience(
     profile.user = user
     experience = experience_factory(profile=profile)
 
-    response = registered_api_client.patch(
-        reverse("experience-detail", kwargs={"pk": experience.id}), data={"since": "1970-01-01"}
+    _try_update_and_delete_experience(
+        experience.id, status.HTTP_403_FORBIDDEN, registered_api_client, experience_factory
     )
-
-    assert response.status_code == 403
-
-    response = registered_api_client.delete(reverse("experience-detail", kwargs={"pk": experience.id}))
-
-    assert response.status_code == 403
